@@ -11,3 +11,37 @@
     display: flex;
     margin-top: 20px;
 }
+
+.workout-thread {
+    display: flex;
+    justify-content: space-between;
+}
+
+aside {
+    display: flex;
+}
+
+aside button {
+    border: 0.5px solid gray;
+    height: 30px;
+    border-radius: 5px;
+    margin: 5px 6px 5px 0;
+}
+
+.thread-bottom textarea {
+    width: 50%;
+    height: 100px;
+    border-radius: 10px;
+    resize: none;
+    padding: 20px;
+    border: 0.5px solid gray;
+}
+
+.thread-bottom button {
+    border: 0.5px solid gray;
+    width: 5%;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+

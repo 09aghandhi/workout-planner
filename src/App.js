@@ -58,14 +58,26 @@ function App() {
     <div className="App">
       <div className="workout-planner">
         <h1>Workout Planner</h1>
-        <div className="textarea"></div>
-        <div>
-          <textarea value={userInput} onChange={(event) => setUserInput(event.target.value)} />
+      </div>
+
+      <div className='workout-planner2'>
+        <div className='workout-thread'>
+            <h4>Thread</h4>
+            <aside>
+                <button>Run</button>
+                <button>Clear</button>
+            </aside>           
         </div>
-        <div className="btn">
-          <button onClick={askChatbot}>Generate</button>
+
+        <div className='thread-bottom'>
+            <textarea placeholder='Enter your message.....' value={userInput} onChange={(event) => setUserInput(event.target.value)} />
+            <div>
+                <button onClick={askChatbot}>Run</button>
+            </div>
+            <div className="btn">{chatBotResponse}</div>
         </div>
-        <div className="btn">{chatBotResponse}</div>
+
+
       </div>
     </div>
   );
