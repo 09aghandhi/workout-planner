@@ -1,0 +1,13 @@
+.workout-planner {
+    display: grid;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    align-content: stretch;
+    align-items: baseline;
+    justify-content: center;
+}
+  
+.btn {
+    display: flex;
+    margin-top: 20px;
+}
