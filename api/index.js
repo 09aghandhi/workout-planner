@@ -1,65 +1,29 @@
-// const apikey = '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';
-//
-// // index.js
-// const express = require('express');
-// const axios = require('axios');
-// const app = express();
-// const port = 3001;
-// const bodyParser = require('body-parser');
-// app.use(bodyParser.json());
-//
-// // Define a simple route
-// app.post('/workout', async (req, res) => {
-//   const {userInput} = req.body;
-//   const response = await axios.post('https://api.openai.com/v1/engines/davinci/completions', {userInput}, {headers: {Authorization: `Bearer ${apikey}`, ContentType: 'application/json'}});
-//   const result = response.data.choices[0].text;
-//   console.log(response);
-// });
-//
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server is running at http://localhost:${port}`);
-// });
-//
-// // thread = client.beta.threads.create();
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const { generateWorkoutPlan } = require("./workoutGenerator");
 
-// index.js
-
-const apikey = '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';
-const express = require('express');
-const axios = require('axios');
 const app = express();
-const port = 3001;
-const bodyParser = require('body-parser');
-const cors = require('cors');
+
 app.use(cors());
 app.use(bodyParser.json());
 
+app.post("/sendMessage", async (req, res) => {
+  const { message } = req.body;
 
-// Define a simple route
-app.post('/workout', async (req, res) => {
-  try {
-    const { userInput } = req.body;
-    const response = await axios.post(
-      'https://api.openai.com/v1/engines/davinci/completions',
-      { prompt: userInput },
-      {
-        headers: {
-          Authorization: `Bearer ${apikey}`,
-          ContentType: 'application/json',
-        },
-      }
-    );
-    const result = response.data.choices[0].text;
-    console.log(result);
-    res.json({ result }); // Send the result back to the client
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: 'Internal Server Error' }); // Handle errors
+  const isReady = true;
+
+  if (isReady) {
+    console.log("here");
+
+    const workoutPlan = await generateWorkoutPlan(message);
+    console.log(workoutPlan, "workoutPlan");
+
+    res.json({ message: "Workout plan generated:", workoutPlan });
+  } else {
+    res.json({ message: "Please provide more information." });
   }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
